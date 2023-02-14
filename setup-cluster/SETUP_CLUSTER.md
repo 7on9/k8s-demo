@@ -1,5 +1,5 @@
 > # Kubernetes Reference Guide: 
-> [Kubenetes's official documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/)
+> [Official Kubernetes documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/)
 > [Linode - Using kubeadm to Deploy a Kubernetes Cluster](https://www.linode.com/docs/guides/getting-started-with-kubernetes/)
 
 
@@ -238,7 +238,7 @@ When issuing this command, it is necessary to set the Pod network range that Cal
 >Note
 The Pod network IP range should not overlap with the service IP network range. The default service IP address range is 10.96.0.0/12. You can provide an alternative service ip address range using the --service-cidr=10.97.0.0/12 option when initializing kubeadm. Replace 10.97.0.0/12 with the desired service IP range:
 
-For a full list of available kubeadm initialization options, see the official Kubernetes documentation.
+For a full list of available kubeadm initialization options, see the [Official Kubernetes documentation](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/).
 
 If use `cri-dockerd.sock`
 ```
