@@ -151,5 +151,5 @@ Worker nodes in a Kubernetes cluster are servers that run your applications’ P
 ### More Information
 You may wish to consult the following resources for additional information on this topic. While these are provided in the hope that they will be useful, please note that we cannot vouch for the accuracy or timeliness of externally hosted materials.
 
-Kubernetes API Documentation
-Kubernetes Concepts Documentation
+- [Kubernetes API Documentation](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/)
+- [Kubernetes Concepts Documentation](https://kubernetes.io/docs/concepts/)
