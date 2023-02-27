@@ -62,3 +62,11 @@ If application cannot resolve the mapping service name, you should restart the k
 ```
 kubectl -n kube-system rollout restart deployment coredns
 ```
+
+# ingress-nginx-controller-admission-not-found 
+
+Fix: [ingress-nginx-controller-admission-not-found](https://stackoverflow.com/questions/61365202/nginx-ingress-service-ingress-nginx-controller-admission-not-found)
+
+```
+kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+```
