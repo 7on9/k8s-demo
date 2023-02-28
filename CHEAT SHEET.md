@@ -62,3 +62,16 @@ If application cannot resolve the mapping service name, you should restart the k
 ```
 kubectl -n kube-system rollout restart deployment coredns
 ```
+
+## Namespace stuck at Terminating 
+
+Firstly export your namespace name in env which got struck in Terminating state
+
+```
+export NAMESPACE=<namespace>
+```
+Then run below command to delete the Terminating namespace
+
+```
+kubectl get namespace $NAMESPACE -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/$NAMESPACE/finalize -f -
+```
