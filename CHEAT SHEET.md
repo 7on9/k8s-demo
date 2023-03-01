@@ -75,3 +75,10 @@ Then run below command to delete the Terminating namespace
 ```
 kubectl get namespace $NAMESPACE -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/$NAMESPACE/finalize -f -
 ```
+# ingress-nginx-controller-admission-not-found 
+
+Fix: [ingress-nginx-controller-admission-not-found](https://stackoverflow.com/questions/61365202/nginx-ingress-service-ingress-nginx-controller-admission-not-found)
+
+```
+kubectl delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+```
