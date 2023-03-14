@@ -17,6 +17,7 @@ Disable swap memory on your Linodes. Kubernetes requires that you disable swap m
 
 ```
 sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 ```
 
 Verify that your swap has been disabled. You should expect to see a value of 0 returned.
@@ -248,7 +249,7 @@ sudo kubeadm init --pod-network-cidr=10.2.0.0/16 --cri-socket=unix:///var/run/cr
 If use `containerd.sock`
 
 ```
-sudo kubeadm init --pod-network-cidr=10.2.0.0/16 --cri-socket=unix:///var/run/containerd/containerd.sock
+sudo kubeadm init --pod-network-cidr=10.2.0.0/16 --cri-socket=unix:///var/run/containerd/containerd.sock --upload-certs
 ```
 
 You should see a similar output:
@@ -286,7 +287,31 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-Install the necessary CNI(Container Network Interface) manifests to your master node and apply them using kubectl (In this case we use `Flannel`):
+If you see this error:
+
+`[ERROR CRI]: container runtime is not running: output: time="2023-03-06T03:16:20Z" level=fatal msg="validate service connection: CRI v1 runtime API is not implemented for endpoint \"unix:///var/run/containerd/containerd.sock\": rpc error: code = Unimplemented desc = unknown service runtime.v1.RuntimeService"`
+
+=> The `containerd.service` is not work correctly. To resolve it:
+
+
+- remove config 
+```
+rm /etc/containerd/config.toml
+```
+
+- Restart containerd: 
+```
+systemctl restart containerd
+```
+
+Install the necessary CNI(Container Network Interface) manifests to your master node and apply them using kubectl (In this case we use `Flannel` or `Weave`):
+
+**Wave**
+
+See installation from [Weave.works](https://www.weave.works/docs/net/latest/kubernetes/kube-addon/)
+
+
+**Flannel**
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
